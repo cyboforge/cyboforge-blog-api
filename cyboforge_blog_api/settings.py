@@ -74,9 +74,25 @@ WSGI_APPLICATION = 'cyboforge_blog_api.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':  os.environ.get('TRANSACTION_DB_NAME'),
+        'USER':  os.environ.get('TRANSACTION_DB_USER'),
+        'PASSWORD':  os.environ.get('TRANSACTION_DB_PASSWORD'),
+        'HOST': os.environ.get('TRANSACTION_DB_HOST'),
+        'PORT': os.environ.get('TRANSACTION_DB_PORT'),
+    },
+    'mongodb':{
+        'ENGINE': 'djongo',
+        'NAME': os.environ.get('MONGO_DB_NAME'),
+        'CLIENT': {
+            'host': os.environ.get('MONGO_DB_HOST'),
+            'port': os.environ.get('MONGO_DB_PORT'),
+        }
     }
 }
 
